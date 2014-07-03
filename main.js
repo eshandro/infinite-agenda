@@ -1,3 +1,8 @@
+function ApplicationData(date,info) {
+	this.date = date;
+	this.info = info;
+}
+
 var displayDate = function () {
 	var date = new Date();
 	var index = $(this).closest('.appointment-day').index();
@@ -7,10 +12,14 @@ var displayDate = function () {
 	return displayDate;
 }
 
-// var findNextDay = function () {
-// 	var nextDay = 
-// }
 
 $(document).on('ready', function() {
+  // Displays date on each appointment day
   $('.current-date').html(displayDate);
+
+  // Make button open and close appoint textarea
+  $(document).on('click', '.add-button', function() {
+  	$(this).prev('.new-appointment').slideToggle(1000);
+  })
+
 });
