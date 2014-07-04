@@ -25,7 +25,7 @@ $(document).on('ready', function() {
 	$(this).prev('.submit-button').slideToggle(1000);  
   });
 
-// Adds appointment info to list and closes textarea
+// Adds appointment info to list and closes textarea on enter press
   $(document).on('keypress', '.new-appointment', function(event) {
   		var code = (event.keyCode ? event.keyCode : event.which);
   		if (code === 13) {
@@ -34,7 +34,7 @@ $(document).on('ready', function() {
   			appointmentsList.push (new ApplicationData(date,info));
   			$(this).val('')
   			$(this).slideToggle(1000);
-  			$(this).next('submit-button').slideToggle(1000);
+  			$(this).next('.submit-button').slideToggle(1000);
   		}
   });
   
