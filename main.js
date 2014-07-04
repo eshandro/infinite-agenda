@@ -13,10 +13,15 @@ var displayDate = function () {
 	var displayDate = date.toLocaleDateString();
 	return displayDate;
 }
-
+// HTML for each appointment day area
 var appointmentDay = $('<div class="appointment-day"></div>');
 var currentDate = $('<span class="current-date"></span>');
 var newAppointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>') 
+
+
+
+// HTML for displaying a new appointment
+var displayNewAppointment = $('<ul><li class="display-appointment"></li></ul>');
 
 
 $(document).on('ready', function() {
@@ -33,11 +38,18 @@ $(document).on('ready', function() {
   $(document).on('keypress', '.new-appointment', function(event) {
   		var code = (event.keyCode ? event.keyCode : event.which);
   		if (code === 13) {
-  			var info = $(this).val();
+  			// Collect info about appointment add object to appointmentsList
+        var info = $(this).val();
   			var date = $(this).prev('.current-date').html();
   			appointmentsList.push (new ApplicationData(date,info));
-  			$(this).val('')
-  			$(this).slideToggle(1000);
+  			// Erase Data entered and add placeholder
+        $(this).val('').attr('placeholder="Enter your appointment details here"');
+  			
+        // Display new appointment information
+        $(this).find('.add-button')(displayNewAppointment);
+        $(this).next().children().html(info);
+
+        $(this).slideToggle(1000);
   			$(this).next('.submit-button').slideToggle(1000);
   		}
   });
@@ -51,5 +63,6 @@ $(document).on('ready', function() {
   	$(this).prev('.new-appointment').slideToggle(1000);
   	$(this).slideToggle(1000);
   });
+
 
 });  
