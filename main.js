@@ -14,9 +14,9 @@ var displayDate = function () {
 	return displayDate;
 }
 
-var appointment-day = $('<div class="appointment-day"></div>');
-var current-date = $('<span class="current-date"></span>');
-var new-appointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>') 
+var appointmentDay = $('<div class="appointment-day"></div>');
+var currentDate = $('<span class="current-date"></span>');
+var newAppointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>') 
 
 
 $(document).on('ready', function() {
