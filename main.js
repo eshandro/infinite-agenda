@@ -13,10 +13,25 @@ var displayDate = function () {
 	var displayDate = date.toLocaleDateString();
 	return displayDate;
 }
+
+// Add a new day to the page
+var addADay = function () {
+  var newDayList = [ appointmentDay, currentDate, newAppointment, submitButton, addButton];
+  for (i=1; i < newDayList.length; i++) {
+    $(appointmentDay).append(newDayList[i]);
+    }
+  var addedDay = appointmentDay  
+  return addedDay;
+  }
+
+
+
 // HTML for each appointment day area
 var appointmentDay = $('<div class="appointment-day"></div>');
 var currentDate = $('<span class="current-date"></span>');
-var newAppointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>') 
+var newAppointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>');
+var submitButton = $('<button class="submit-button">Submit</button>');
+var addButton = $('<button class="add-button">Add</button>');
 
 
 
@@ -25,6 +40,7 @@ var displayNewAppointment = $('<ul class="display-appointment"></ul>');
 
 
 $(document).on('ready', function() {
+  
   // Displays date on each appointment day
   $('.current-date').html(displayDate);
 
@@ -71,5 +87,16 @@ $(document).on('ready', function() {
   	$(this).slideToggle(1000);
   });
 
+  $(window).scroll(function(){
+    if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+      // $('.main-content').append(addADay());
+      $('.main-content').append(appointmentDay);
+      $(appointmentDay).append(currentDate);
+      $(appointmentDay).append(newAppointment);
+      $(appointmentDay).append(submitButton);
+      $(appointmentDay).append(addButton);
+      $('.current-date').html(displayDate);      
+    }
+  }); 
 
 });  

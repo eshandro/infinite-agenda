@@ -35,11 +35,9 @@ header {
 	position: relative;
 }
 
-/*.appointment-area {
-	position: relative;
-	display: none;
-	height: 200px;
-}*/
+.appointment-day:nth-child(7n+1) {
+	margin-bottom: 36px;
+}
 
 .current-date {
 	color: rgba(64,64,64,.7);
