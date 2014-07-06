@@ -17,21 +17,21 @@ var displayDate = function () {
 // Add a new day to the page
 var addADay = function () {
   var newDayList = [ appointmentDay, currentDate, newAppointment, submitButton, addButton];
+  var newDay = $(appointmentDay);
+  var newHtml = '';
   for (i=1; i < newDayList.length; i++) {
-    $(appointmentDay).append(newDayList[i]);
+    newHtml += newDayList[i];
     }
-  var addedDay = appointmentDay  
-  return addedDay;
+    $(newDay).append(newHtml);
+  return newDay; 
   }
 
-
-
 // HTML for each appointment day area
-var appointmentDay = $('<div class="appointment-day"></div>');
-var currentDate = $('<span class="current-date"></span>');
-var newAppointment = $('<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>');
-var submitButton = $('<button class="submit-button">Submit</button>');
-var addButton = $('<button class="add-button">Add</button>');
+var appointmentDay = '<div class="appointment-day" style="display: none"></div>';
+var currentDate = '<span class="current-date"></span>';
+var newAppointment = '<textarea class="new-appointment" placeholder="Enter your appointment details here"></textarea>';
+var submitButton = '<button class="submit-button">Submit</button>';
+var addButton = '<button class="add-button">Add</button>';
 
 
 
@@ -50,7 +50,7 @@ $(document).on('ready', function() {
 	$(this).prev('.submit-button').slideToggle(1000);  
   });
 
-// Adds appointment info to list and closes textarea on enter press
+  // Adds appointment info to list and closes textarea on enter press
   $(document).on('keypress', '.new-appointment', function(event) {
   		var code = (event.keyCode ? event.keyCode : event.which);
   		if (code === 13) {
@@ -65,6 +65,8 @@ $(document).on('ready', function() {
         // Display new appointment information
         $(this).siblings('.add-button').after(displayNewAppointment);
         $(this).siblings('.add-button').next().append('<li>' + info + '</li>');
+
+
 
         // Closes the textarea and submit button
         $(this).slideToggle(1000);
@@ -88,14 +90,15 @@ $(document).on('ready', function() {
   });
 
   $(window).scroll(function(){
-    if  ($(window).scrollTop() == $(document).height() - $(window).height()){
-      // $('.main-content').append(addADay());
-      $('.main-content').append(appointmentDay);
-      $(appointmentDay).append(currentDate);
-      $(appointmentDay).append(newAppointment);
-      $(appointmentDay).append(submitButton);
-      $(appointmentDay).append(addButton);
-      $('.current-date').html(displayDate);      
+    // Add a new day everytime user scrolls to bottom - infinite scroll
+    if ($(window).scrollTop() === $(document).height() - $(window).height()){
+      $('.main-content').append(addADay);
+
+      $('.current-date').html(displayDate);
+
+      $('.appointment-day:last').show('slow');
+
+      $('.to-top').removeClass('is-hidden');
     }
   }); 
 

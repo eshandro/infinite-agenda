@@ -100,5 +100,17 @@ header {
 
 }
 
+.is-hidden {
+	display: none;
+}
 
+.to-top {
+	position: fixed;
+	right: 20px;
+	bottom: 40px;
+}
 
+.to-top a {
+	text-decoration: none;
+	color: #FFF;
+}
