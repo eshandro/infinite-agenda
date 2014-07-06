@@ -21,7 +21,7 @@ var newAppointment = $('<textarea class="new-appointment" placeholder="Enter you
 
 
 // HTML for displaying a new appointment
-var displayNewAppointment = $('<ul><li class="display-appointment"></li></ul>');
+var displayNewAppointment = $('<ul class="display-appointment"></ul>');
 
 
 $(document).on('ready', function() {
@@ -42,13 +42,15 @@ $(document).on('ready', function() {
         var info = $(this).val();
   			var date = $(this).prev('.current-date').html();
   			appointmentsList.push (new ApplicationData(date,info));
-  			// Erase Data entered and add placeholder
-        $(this).val('').attr('placeholder="Enter your appointment details here"');
+  			
+        // Erase Data entered 
+        $(this).val('');
   			
         // Display new appointment information
-        $(this).find('.add-button')(displayNewAppointment);
-        $(this).next().children().html(info);
+        $(this).siblings('.add-button').after(displayNewAppointment);
+        $(this).siblings('.add-button').next().append('<li>' + info + '</li>');
 
+        // Closes the textarea and submit button
         $(this).slideToggle(1000);
   			$(this).next('.submit-button').slideToggle(1000);
   		}
@@ -59,8 +61,13 @@ $(document).on('ready', function() {
   	var info = $(this).prev('.new-appointment').val();
   	var date = $(this).prev().prev('.current-date').html();
   	appointmentsList.push(new ApplicationData(date,info));
-  	$(this).prev('.new-appointment').val('');
-  	$(this).prev('.new-appointment').slideToggle(1000);
+  	
+    $(this).prev('.new-appointment').val('');
+  	
+    $(this).siblings('.add-button').after(displayNewAppointment);
+    $(this).siblings('.add-button').next().append('<li>' + info + '</li>');
+
+    $(this).prev('.new-appointment').slideToggle(1000);
   	$(this).slideToggle(1000);
   });
 
