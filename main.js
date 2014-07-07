@@ -96,7 +96,7 @@ $(document).on('ready', function() {
 
       $('.current-date').html(displayDate);
 
-      $('.appointment-day:last').show('slow');
+      $('.appointment-day:last').fadeIn('1500');
 
       $('.to-top').removeClass('is-hidden');
     }
